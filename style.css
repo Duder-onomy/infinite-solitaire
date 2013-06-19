@@ -1,0 +1,79 @@
+      body {
+        text-align: center;
+      }
+
+      footer {
+        background-image: url('grass-border.svg');
+        background-position: bottom;
+        background-repeat: repeat-x;
+        position: absolute;
+        bottom: 0px;
+        height: 125px;
+        width: 100%;
+      }
+
+      .square {
+        width: 80px;
+        height: 80px;
+        padding: 10px;
+        background-color: lightgray;
+        display: inline-block;
+        border-radius: 5px;
+        box-shadow: 3px 3px 3px #888888;
+      }
+      .square:hover {
+        opacity:.5;
+      }
+
+      .row {
+        display: block;
+      }
+
+      button {
+        width: 515px;
+        height: 50px;
+        padding: 10px;
+        font-size: 30px;
+        text-shadow: 0px 2px 3px #555;
+      }
+
+      .blue {
+        background-color: #50786F;
+      }
+      .red {
+        background-color: #994A21;
+      }
+
+      #congrats {
+        background-color: red;
+        /*visibility: hidden;*/
+        height: 50px;
+        width: 300px;
+        display: none;
+      }
+
+/*      #running_man {
+        background-image: url('running.gif');
+        background-repeat: no-repeat;
+        background-size: contain;
+        height: 100px;
+        z-index: -10;
+        overflow: hidden;
+        -webkit-animation-name: running_man_animation;
+        -webkit-animation-duration: 10s;
+        -webkit-animation-iteration-count: 60;
+        -webkit-animation-play-state: running;
+        -webkit-animation-timing-function: ease-in-out;
+        -webkit-animation-fill-mode: forwards;
+      }
+
+      @-webkit-keyframes running_man_animation {
+        0% {
+          -webkit-transform: translate(-200px, 0x);
+          transform: translate(-200px, 0px);
+          }
+        100% {
+          -webkit-transform: translate(1500px, 0px);
+          transform: translate(1500px, 0px);
+          }
+      }*/

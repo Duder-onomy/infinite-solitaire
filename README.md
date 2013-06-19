@@ -1,4 +1,19 @@
-infinite-solitaire
-==================
+Exercise
 
-Inifinite version of JavaScript Solitaire app
+Step 1:
+
+Create an html page with a 3x3 grid of divs that are 80x80 pixels with 10 pixels of padding all around. Give them all a background color of light gray.
+Underneath the grid add a link with the word “Wipe” in it.
+Step 2:
+
+When you click on a box, change the background-color of the box to blue. Clicking again reverts the color to gray.
+
+When you click the Wipe link, all the boxes should revert to gray
+
+If all the boxes are BLUE, show a hidden div that says congratulations!
+
+
+Step 3:
+
+When you click a box, toggle the background color of that box and those boxes directly connected to it.
+Once that’s working, change the board size to be 5x5
