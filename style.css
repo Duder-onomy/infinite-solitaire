@@ -1,5 +1,5 @@
       body {
-        text-align: center;
+        /*text-align: center;*/
       }
 
       footer {
@@ -13,9 +13,9 @@
       }
 
       .square {
-        width: 80px;
-        height: 80px;
-        padding: 10px;
+        width: 40px;
+        height: 40px;
+        padding: 8px;
         background-color: lightgray;
         display: inline-block;
         border-radius: 5px;
@@ -27,6 +27,7 @@
 
       .row {
         display: block;
+
       }
 
       button {
@@ -35,6 +36,7 @@
         padding: 10px;
         font-size: 30px;
         text-shadow: 0px 2px 3px #555;
+        border-radius: 5px 5px 0 0;
       }
 
       .blue {
@@ -50,6 +52,32 @@
         height: 50px;
         width: 300px;
         display: none;
+      }
+
+      #blue-score {
+        background-color: #50786F;
+        text-align: center;
+        width: 257.25px;
+        height: 50px;
+        display: inline-block;
+        float: left;
+        border-radius: 0 0 0 5px;
+      }
+
+      #red-score {
+        background-color: #994A21;
+        text-align: center;
+        width: 257.25px;
+        height: 50px;
+        display: inline-block;
+        float: right;
+        border-radius: 0 0 5px 0;
+      }
+
+      #score-container {
+        margin: 0 auto;
+        width: 515px;
+        height: 100px;
       }
 
 /*      #running_man {
