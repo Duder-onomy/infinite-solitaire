@@ -25,6 +25,14 @@
         opacity:.5;
       }
 
+      .invisible_square{
+        visibility: hidden;
+      }
+
+      .visible {
+        visibility: visible;
+      }
+
       .row {
         display: block;
 

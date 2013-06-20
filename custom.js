@@ -3,13 +3,12 @@ var counter = 0;
 // var counter_blue = 0;
 
 $(document).ready(function() {
-  $('#container').on('click', 'div', function(e) {
+  $('#container').on('click', '.square', function(e) {
     colorfy($(this));
-    neighborhood = neighbors($(this));
-    colorfy(neighborhood);
+    neighbors($(this));
     // e.stopPropogation();
-    // scoreCounter();
-    // counter++;
+    scoreCounter();
+    counter = counter + 1;
   });
 
   $('button').on('click', function() {
@@ -19,39 +18,42 @@ $(document).ready(function() {
 
 // neighbors function determines the neighbors of the div that was closed and make them blue
 var neighbors = function (obj) {
-  var selected_row = parseInt(obj.parent().attr('id'), 10);
-  var selected_column = parseInt(obj.parent('div').length + 1, 10);
-  var selected_row_minus_one = selected_row - 1;
-  var selected_row_plus_one = selected_row + 1;
+  var selected_row_number = parseInt(obj.parent().attr('id'), 10);
+  var selected_row_number_minus_one = selected_row_number - 1;
+  var selected_row_number_plus_one = selected_row_number + 1;
   ///////////////////////////LEFT SIDE/////////////////////////////////////////
-  divPrepend(1, $('div[id='+selected_row+']'));
+  if (obj.index() !== 0 && obj.parent('div').children().length !== 25) {
+    if (obj.parent('div').children().length === 1) {
+      add_first_column();
+    } else {
+      divPrepend(1, $('div[id='+selected_row_number+']'));
+    }
+  }
   ///////////////////////////RIGHT SIDE////////////////////////////////////////
-  divAppend(1, $('div[id='+selected_row+']'));
+  if (obj.parent('div').children().length != 25) {
+    divAppend(1, $('div[id='+selected_row_number+']'));
+  }
   ///////////////////////////ABOVE/////////////////////////////////////////////
-  var above_row = $('div[id='+selected_row_minus_one+']');
-  var above_to_add = parseInt(obj.parent('div').length + 1, 10) - $('div[id='+selected_row_minus_one+']').children('div').length;
+  var above_row = $('div[id='+selected_row_number_minus_one+']');
+  var above_to_add = ($(obj.parent('div')).children().length - 1) - $('div[id='+selected_row_number_minus_one+']').children().length;
   divAppend(above_to_add, above_row);
 
   ///////////////////////////BOTTOM////////////////////////////////////////////
-  var below_row = $('div[id='+selected_row_plus_one+']');
-  var below_to_add = parseInt(obj.parent('div').length + 1, 10) - $('div[id='+selected_row_plus_one+']').children('div').length;
+  var below_row = $('div[id='+selected_row_number_plus_one+']');
+  var below_to_add = ($(obj.parent('div')).children().length - 1) - $('div[id='+selected_row_number_plus_one+']').children().length;
   divAppend(below_to_add, below_row);
 
-  var this_squares_index = $(obj).index();
-  ///////////THE FOLLOWING LINES DO NOT WORK!!!!??/////////////////////////////
-  var neighborhood = $(above_row).get(this_squares_index);
-  console.log(neighborhood);
+  ///////////////////////////NEIGHBORS/////////////////////////////////////////
+  var this_squares_index = parseInt($(obj).index(), 10);
+  var one_plus_index = this_squares_index + 1;
+  var one_minus_index = this_squares_index - 1;
 
-  // $('fieldset').index($(this).parents('fieldset'))
-  // var selected_row = parseInt(obj.attr('data-row'));
-  // var selected_column = parseInt(obj.attr('data-column'));
+  var neighborhood = [$('div[id='+selected_row_number_minus_one+']').children().get(this_squares_index),
+                      $('div[id='+selected_row_number_plus_one+']').children().get(this_squares_index),
+                      $('div[id='+selected_row_number+']').children().get(one_plus_index),
+                      $('div[id='+selected_row_number+']').children().get(one_minus_index)];
 
-  // var neighbors_array = [$('div[data-row='+(selected_row - 1)+'][data-column='+(selected_column)+']'),
-  //                        $('div[data-row='+(selected_row + 1)+'][data-column='+(selected_column)+']'),
-  //                        $('div[data-row='+(selected_row)+'][data-column='+(selected_column - 1)+']'),
-  //                        $('div[data-row='+(selected_row)+'][data-column='+(selected_column + 1)+']')];
-
-  // return neighborhood;
+  colorfy(neighborhood);
 };
 
 var divAppend = function(number, rows) {
@@ -67,18 +69,31 @@ var divPrepend = function(number, rows) {
   }
 };
 
-
+var add_first_column = function() {
+  var all_rows = $('div.row');
+  for (var i = 0; i < all_rows.length; i++) {
+    var this_row = all_rows[i];
+    divPrepend(1, $(this_row));
+  }
+};
 
 // this method toggles the class of the elements passed to it
 var colorfy = function(elements) {
   for (var i = 0; i < elements.length; i++) {
     var element = $(elements[i]);
     if (counter % 2 === 0) {
-      element.removeClass('red blue').addClass('blue', '400');
+      element.removeClass('red blue invisible_square').addClass('blue', '400').addClass('visible');
     } else {
-      element.removeClass('red blue').addClass('red', '400');
+      element.removeClass('red blue invisible_square').addClass('red', '400').addClass('visible');
     }
-  };
+  }
+  var all_other_squares = $('.square');
+  for (var j = 0; j < all_other_squares.length; j++ ) {
+    var this_square = all_other_squares[j];
+    if (!$(this_square).hasClass('blue') && !$(this_square).hasClass('red')) {
+      $(this_square).addClass('invisible_square');
+    }
+  }
 };
 
 // counts the score for each color and displays it
